@@ -14,9 +14,15 @@
     <div class="container">
         <div id="sideMenu">
             <h3 class="menu-title">Find Your San Francisco Home</h3>
+            <hr>
             <div class="row">
                 <button id="showListing">Show Listings</button>
                 <button id="hideListing">Hide Listings</button>
+            </div>
+            <hr>
+            <div class="row">
+                <span>Draw a shape to search for homes!  .</span>
+                <button id="toggleDrawingTools">Drawing Tools</button>
             </div>
         </div>
         <div id="map"></div>
@@ -25,7 +31,7 @@
 
 
     <script src="js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&v=3&key=AIzaSyA8X7hPwr4XRW6r2OcuWj_O-UfyeT104c4&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&v=3&key=AIzaSyA8X7hPwr4XRW6r2OcuWj_O-UfyeT104c4&callback=initMap"
         async defer></script>
 </body>
 </html>

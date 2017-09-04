@@ -12,13 +12,12 @@ body {
 }
 
 #map {
-    width: 75%;
+    width: 100%;
 }
 
 #sideMenu {
-    width: 25%;
-    max-width: 512px;
-    min-width: 360px;
+    min-width: 400px;
+    max-width: 400px;
     background-color: #ffffff;
     padding: 15px;
 }

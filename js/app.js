@@ -42,10 +42,83 @@ function init() {
     document.getElementById('showListing').addEventListener('click', function(e) {
         showListings();
     });
+
     document.getElementById('hideListing').addEventListener('click', function(e) {
         hideListings();
+        // Hide the polygon if the user hides all listings
+        polygon.setMap(null);
     });
+
+
+    /**************** Setup Map Drawing Tools ****************/
+
+
+    var drawingManager = new google.maps.drawing.DrawingManager({
+        drawingMode: google.maps.drawing.OverlayType.POLYGON,
+        drawingControl: true,
+        drawingControlOptions: {
+            position: google.maps.ControlPosition.LEFT_TOP,
+            drawingModes: [google.maps.drawing.OverlayType.POLYGON]
+        },
+        polygonOptions: {
+            editable: true,
+            zIndex: 1
+        }
+    });
+
+    // The one polygon instance that exist on the map
+    var polygon;
+
+    // When a polygon is drawn, only show listings that are within it including
+    // those that are after the polygon has been edited
+    drawingManager.addListener('overlaycomplete', function(event) {
+        if (polygon) {
+            polygon.setMap(null);
+            hideListings();
+        }
+
+        drawingManager.setDrawingMode(null);
+
+        polygon = event.overlay;
+        polygon.setEditable(true);
+
+        searchOverlayListings();
+
+        // Research polygon for which listings reside within
+        polygon.getPath().addListener('set_at', searchOverlayListings);
+        polygon.getPath().addListener('insert_at', searchOverlayListings);
+    });
+
+    // Unhide listings that are within the drawn polygon, remaining are hidden
+    function searchOverlayListings() {
+        var containsLocation = google.maps.geometry.poly.containsLocation;
+        markers.forEach(function(marker) {
+            if (containsLocation(marker.position, polygon)) {
+                marker.setMap(map);
+            } else {
+                marker.setMap(null);
+            }
+        });
+    }
+
+    document.getElementById('toggleDrawingTools').addEventListener('click', function(e) {
+        toggleDrawingTools();
+    });
+
+    function toggleDrawingTools() {
+        if (drawingManager.map !== map) {
+            drawingManager.setMap(map);
+        } else {
+            // Hide the drawing manager
+            drawingManager.setMap(null);
+            // Remove any drawn polygon and hide listings
+            polygon.setMap(null);
+            hideListings();
+        }
+    }
+
 }
+
 
 // Opens the passed infowindow with the marker as the anchor while displaying
 // the title of the marker and presenting a street view if one is available.
@@ -120,5 +193,5 @@ function initMap() {
     });
 
     init();
-    showListings();
+    // showListings();
 }
