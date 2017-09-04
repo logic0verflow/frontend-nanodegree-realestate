@@ -49,6 +49,34 @@ function init() {
         polygon.setMap(null);
     });
 
+    document.getElementById('zoom-submit').addEventListener('click', function(e) {
+        zoomToArea();
+    });
+
+    function zoomToArea() {
+        // Get the user input and test for existing value
+        var text = document.getElementById('zoom-text').value;
+        if (text == '') {
+            window.alert('You must enter an area or address.');
+        } else {
+            var geocoder = new google.maps.Geocoder();
+            // Pass the input to geocoder with bias results, then center view
+            geocoder.geocode(
+                {
+                    'address': text,
+                    'componentRestrictions': {'locality': 'San Francisco'}
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        map.setCenter(results[0].geometry.location);
+                        map.setZoom(15);
+                    } else {
+                        window.alert("No results were found!")
+                    }
+                }
+            );
+        }
+    }
+
 
     /**************** Setup Map Drawing Tools ****************/
 
@@ -189,9 +217,33 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 37.776784, lng: -122.416622 },
         zoom: 16,
-        mapTypeControl: false
+        mapTypeControl: false,
+        styles: [{
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.fill",
+            "stylers": [{ "lightness": "0" }]
+        },{
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [{ "lightness": "-49" }]
+        },{
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [{"saturation": "-100"},{"weight": "1.00"}]
+        },{
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [{"saturation": "0"},{"lightness": "-39"}]
+        },{
+            "featureType": "transit.line",
+            "elementType": "geometry.fill",
+            "stylers": [{"lightness": "-63"}]
+        },{
+            "featureType": "water",
+            "elementType": "geometry.fill",
+            "stylers": [{"lightness": "-24"}]
+        }]
     });
 
     init();
-    // showListings();
 }

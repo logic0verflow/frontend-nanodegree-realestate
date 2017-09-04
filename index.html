@@ -16,19 +16,26 @@
             <h3 class="menu-title">Find Your San Francisco Home</h3>
             <hr>
             <div class="row">
-                <button id="showListing">Show Listings</button>
-                <button id="hideListing">Hide Listings</button>
+                <input type="button" id="showListing" value="Show Listings">
+                <input type="button" id="hideListing" value="Hide Listings">
             </div>
+
             <hr>
+
             <div class="row">
-                <span>Draw a shape to search for homes!  .</span>
-                <button id="toggleDrawingTools">Drawing Tools</button>
+                <span class="draw-label">Draw a shape to search for homes!</span>
+                <input type="button" id="toggleDrawingTools" value="Drawing Tools">
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <input id="zoom-text" type="text">
+                <input type="button" id="zoom-submit" value="Zoom">
             </div>
         </div>
         <div id="map"></div>
     </div>
-
-
 
     <script src="js/app.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&v=3&key=AIzaSyA8X7hPwr4XRW6r2OcuWj_O-UfyeT104c4&callback=initMap"

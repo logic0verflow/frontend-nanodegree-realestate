@@ -31,10 +31,25 @@ body {
     width: 100%;
 }
 
+.draw-label,
+#toggleDrawingTools,
+#zoom-text,
+#showListing,
+#hideListing,
+#zoom-submit {
+    margin: 7px;
+}
+
+#zoom-text {
+    width: 75%;
+}
+#zoom-submit {
+    width: 25%;
+}
+
 #showListing,
 #hideListing {
     width: 50%;
-    margin: 7px;
 }
 
 #pano {
