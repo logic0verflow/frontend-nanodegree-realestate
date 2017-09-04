@@ -6,29 +6,26 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        #map {
-            /*width: 100%;*/
-            height: 100%;
-        }
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <link rel="stylesheet" href="css/app.css">
 
 </head>
 <body>
 
-    <div id="map"></div>
+    <div class="container">
+        <div id="sideMenu">
+            <h3 class="menu-title">Find Your San Francisco Home</h3>
+            <div class="row">
+                <button id="showListing">Show Listings</button>
+                <button id="hideListing">Hide Listings</button>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+
 
 
     <script src="js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyA8X7hPwr4XRW6r2OcuWj_O-UfyeT104c4&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&v=3&key=AIzaSyA8X7hPwr4XRW6r2OcuWj_O-UfyeT104c4&callback=initMap"
         async defer></script>
 </body>
 </html>
